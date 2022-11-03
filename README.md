@@ -23,4 +23,6 @@
 
 [JavaScript で全角英数字を半角英数字に変換する - プログラムを書こう！](https://www.paveway.info/entry/2021/09/06/javascript_fullwidth2halfwidth)
 
+[JavaScriptやTypeScriptでAverage(平均)を計算する方法](https://awesome-linus.com/2021/06/08/js-reduce-average/)
+
 </details>
