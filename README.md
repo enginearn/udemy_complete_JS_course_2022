@@ -1,8 +1,51 @@
 # JavaScript Basics
 
-## What is JavaScript?
+## npm package update
 
->JavaScript is a programming language that allows you to implement complex features on web pages. Every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, interactive maps, animated 2D/3D graphics, scrolling video jukeboxes, or more — you can bet that JavaScript is probably involved. It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) we covered in much more detail in other parts of the Learning Area.
+<details>
+<summary>Check Installed package globally</summary>
+
+``` PowerShell
+npm list -g
+C:\Users\nagar\AppData\Roaming\npm
+├── @angular/cli@14.2.8
+├── @google/clasp@2.4.2
+├── @loopback/cli@4.1.4
+├── cors@2.8.5
+├── firebase-tools@11.16.0
+├── jshint@2.13.5
+├── json-server@0.17.1
+├── live-server@1.2.2
+├── nodemon@2.0.20
+├── npm@8.19.3
+├── serve@14.0.1
+└── typescript@4.8.4
+```
+
+</details>
+
+<details>
+<summary>Check updatable packages</summary>
+
+``` PowerShell
+npm outdated -g
+Package       Current  Wanted  Latest  Location                   Depended by
+@angular/cli   14.2.8  14.2.9  14.2.9  node_modules/@angular/cli  global
+jshint         2.13.5  2.13.6  2.13.6  node_modules/jshint        global
+npm            8.19.3   9.1.1   9.1.1  node_modules/npm           global
+serve          14.0.1  14.1.1  14.1.1  node_modules/serve         global
+```
+
+</details>
+
+<details>
+<summary>Update all global packages</summary>
+
+``` PowerShell
+ npm update -g
+```
+
+</details>
 
 ---
 
