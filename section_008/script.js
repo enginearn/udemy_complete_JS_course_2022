@@ -304,7 +304,7 @@ else console.log('User array empty');
 
 // Looping Objects: Object Keys, Values, and Entries
 // Property NAMES
-const properties = Object.keys(openingHours);
+let properties = Object.keys(openingHours);
 console.log(properties);
 
 let openStr = `We are open on ${properties.length} days: `;
@@ -314,11 +314,11 @@ for (const day of properties) {
 console.log(openStr);
 
 // Property VALUES
-const values = Object.values(openingHours);
+let values = Object.values(openingHours);
 console.log(values);
 
 // Entire object
-const entries = Object.entries(openingHours);
+let entries = Object.entries(openingHours);
 console.log(entries);
 
 for (const [key, { open, close }] of entries) {
@@ -378,7 +378,7 @@ console.log(rest.get('name'));
 console.log(rest.get(true));
 console.log(rest.get(1));
 
-const time = 21;
+const time = 9;
 console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
 
 console.log(rest.has('categories'));
@@ -408,6 +408,26 @@ console.log(question);
 console.log(Object.entries(openingHours));
 const hoursMap = new Map(Object.entries(openingHours));
 console.log(hoursMap);
+
+// Quiz app
+console.log(question.get('question'));
+// Example
+for (const [key, value] of question) {
+    if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+};
+
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+
+question.get(question.get('correct') === answer);
+
+// Convert map to array
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+console.log([...question.entries()]);
+console.log([...question.entries()].map(([key, value]) => key));
 
 // Example
 days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -447,4 +467,68 @@ console.log(airline.slice(4, 7));
 
 console.log(airline.slice(0, airline.indexOf(' ')));
 console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(restaurant.openingHours.mon.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+// Example
+days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+    const open = restaurant.openingHours[day]?.open ?? 'closed';
+    console.log(`On ${day}, we open at ${open}`);
+}
+
+if (restaurant.openingHours.fri) console.log(restaurant.openingHours.fri.open);
+if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+
+// With optional chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+// Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// Proterty NAMES
+properties = Object.keys(openingHours);
+console.log(properties);
+
+openStr = `We are open on ${properties.length} days: `;
+for (const day of properties) {
+    openStr += `${day}, `;
+    for (const [key, { open, close }] of Object.entries(openingHours)) {
+        openStr += `${key} ${open} - ${close} `;
+    }
+}
+console.log(openStr);
+
+for (const day of Object.keys(openingHours)) {
+    console.log(day);
+}
+
+// Property VALUES
+values = Object.values(openingHours);
+console.log(values);
+
+// Entire object
+entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, {open, close}] of entries) {
+    console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+
+// Optional chaining
+if (restaurant.openingHours && restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+// Example
+days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+    const open = restaurant.openingHours[day]?.open ?? 'closed';
+    console.log(`On ${day}, we open at ${open}`);
+}
 
