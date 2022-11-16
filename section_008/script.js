@@ -599,7 +599,7 @@ const checkBaggage = function (items) {
     } else {
         console.log('Welcome aboard!');
     }
-}
+};
 
 checkBaggage('I have a laptop, some Food and a pocket Knife');
 checkBaggage('Socks and camera');
@@ -622,7 +622,7 @@ const capitalizeName = function (name) {
         namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
     }
     console.log(namesUpper.join(' '));
-}
+};
 
 capitalizeName('jessica ann smith davis');
 capitalizeName('jonas schmedtmann');
@@ -632,11 +632,11 @@ const message = 'Go to gate 23!';
 console.log(message.padStart(25, '+').padEnd(35, '+'));
 console.log('Jonas'.padStart(25, '+').padEnd(35, '+'));
 
-const maskCreditCard = number => {
+const maskCreditCard = (number) => {
     const str = number + '';
     const last = str.slice(-4);
     return last.padStart(str.length, '*');
-}
+};
 
 console.log(maskCreditCard(64637836));
 console.log(maskCreditCard(43378463864647384));
@@ -648,9 +648,23 @@ console.log(message2.repeat(5));
 
 const planesInLine = function (n) {
     console.log(`There are ${n} planes in line ${'🛫'.repeat(n)}`);
-}
+};
 
 planesInLine(5);
 planesInLine(3);
 planesInLine(12);
 
+const flight =
+    '_Delayed_Departure;fao93766109;tx12133758400;11:25\
+    +_Arrival;bru93766109;tx12133758400;11:45\
+    +_Delayed_Arrival;hel7439299980;fao93766109;12:05\
+    +_Departure;fao93766109;tx12133758400;12:30';
+
+for (const line of flight.split('+')) {
+    const [type, from, to, time] = line.split(';');
+    const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+        '_',
+        ' '
+    )} from ${from} to ${to} (${time.replace(':', 'h')})`.padStart(45);
+    console.log(output);
+}
