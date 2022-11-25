@@ -209,7 +209,7 @@ const runOnce = function () {
 
 runOnce();
 
-// IIFE
+// Immediately Invoked Function Expression
 (function () {
     console.log('This will never run again');
     const isPrivate = 23;
@@ -227,6 +227,7 @@ runOnce();
 // console.log(isPrivate);
 console.log(notPrivate);
 
+// Closures
 const secureBooking = function () {
     let passengerCount = 0;
 
@@ -244,6 +245,7 @@ booker();
 
 console.dir(booker);
 
+// Example 1
 let f;
 
 const g = function () {
@@ -253,6 +255,10 @@ const g = function () {
     };
 }
 
+g();
+f();
+console.dir(f);
+
 const h = function () {
     const b = 777;
     f = function () {
@@ -260,17 +266,12 @@ const h = function () {
     };
 }
 
-g();
-
-f();
-// console.dir(f);
-
 // Re-assigning f function
 h();
 f();
 console.dir(f);
 
-// Example 1
+// Example 2
 const boardPassengers = function (n, wait) {
     const perGroup = n / 3;
 
