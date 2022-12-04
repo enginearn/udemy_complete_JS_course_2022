@@ -133,13 +133,13 @@ const movementsDescriptions = movementsArray.map(
 console.log(movementsDescriptions);
 
 // FILTER
-const deposits = movementsArray.filter(function (mov) {
+let deposits = movementsArray.filter(function (mov) {
     return mov > 0;
 });
 console.log(movementsArray);
 console.log(deposits);
 
-const withdrawals = movementsArray.filter((mov) => mov < 0);
+let withdrawals = movementsArray.filter((mov) => mov < 0);
 console.log(withdrawals);
 
 // REDUCE
@@ -332,4 +332,120 @@ labelBalance0.addEventListener('click', function () {
 });
 
 // ARRAY METHODS PRACTICE
+// 1
+const bankDepositSum = accounts100
+    .flatMap((acc) => acc.movements)
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+console.log(bankDepositSum);
 
+// 2
+const numDeposits1000 = accounts100
+    .flatMap((acc) => acc.movements)
+    .reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0); // 0 is initial value
+console.log(numDeposits1000);
+
+let a = 10;
+console.log(a++); // 10
+console.log(a);   // 11
+console.log(++a); // 12
+
+// 3
+const { deposits0, withdrawals0 } = accounts100
+    .flatMap((acc) => acc.movements)
+    .reduce(
+        (sums, cur) => {
+            // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+            sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+            return sums;
+        }
+        // { deposits: 0, withdrawals: 0 }
+    );
+console.log(deposits0, withdrawals0);
+
+// 4
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+    const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+    const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+    const titleCase = title
+        .toLowerCase()
+        .split(' ')
+        .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+        .join(' ');
+    return capitalize(titleCase);
+}
+
+const convertTitleCaseOld = function (title) {
+    const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and'];
+    const titleCase = title
+        .toLowerCase()
+        .split(' ')
+        .map((word) =>
+            exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+        )
+        .join(' ');
+    return titleCase;
+}
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+// 5
+console.log(accounts100);
+
+const sumDeposits = (acc) =>
+    acc.movements.filter((mov) => mov > 0).reduce((acc, mov) => acc + mov, 0);
+console.log(sumDeposits(account11));
+
+const createUsername = function (accs) {
+    accs.forEach(function (acc) {
+        acc.username = acc.owner
+            .toLowerCase()
+            .split(' ')
+            .map((name) => name[0])
+            .join('');
+    });
+}
+createUsername(accounts100);
+console.log(accounts100);
+
+const updateUI = function (acc) {
+    // Display movements
+    displayMovements(acc.movements);
+
+    // Display balance
+    calcDisplayBalance(acc);
+
+    // Display summary
+    calcDisplaySummary(acc);
+}
+
+const startLogoutTimer = function () {
+    const tick = function () {
+        const min = String(Math.trunc(time / 60)).padStart(2, 0);
+        const sec = String(time % 60).padStart(2, 0);
+
+        // In each call, print the remaining time to UI
+        labelTimer.textContent = `${min}:${sec}`;
+
+        // When 0 seconds, stop timer and log out user
+        if (time === 0) {
+            clearInterval(timer);
+            labelWelcome.textContent = 'Log in to get started';
+            containerApp.style.opacity = 0;
+        }
+
+        // Decrease 1s
+        time--;
+    };
+
+    // Set time to 5 minutes
+    let time = 120;
+
+    // Call the timer every second
+    tick();
+    const timer = setInterval(tick, 1000);
+    return timer;
+};
